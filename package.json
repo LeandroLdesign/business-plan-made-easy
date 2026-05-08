@@ -1,0 +1,10 @@
+{
+  "name": "facilite-ai-plano",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/index.html",
+    "dev": "node serve.mjs"
+  }
+}
