@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Plano de Negócio — Facilite.ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --amarelo:#f5c518;
+    --preto:#111111;
+    --verde:#00c67a;
+    --offwhite:#fafaf8;
+    --wpp:#25D366;
+    --cinza:#6b6b66;
+    --cinza-claro:#e7e6e0;
+    --cinza-bg:#f4f3ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;min-width:0}
+  html,body{
+    background:var(--cinza-bg);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Helvetica Neue,sans-serif;
+    color:var(--preto);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.45;
+    width:100%;
+    overflow-x:hidden;
+  }
+  body{
+    min-height:100vh;
+    overflow-x:hidden;
+    max-width:100vw;
+  }
+  img,svg,table{ max-width:100%; }
+
+  /* ===== SLIDES ===== */
+  .deck{
+    max-width:1200px;
+    margin:0 auto;
+    padding:24px 16px 100px;
+  }
+  .slide{
+    background:var(--offwhite);
+    border-radius:18px;
+    box-shadow:0 4px 18px rgba(0,0,0,.04), 0 1px 0 rgba(0,0,0,.02);
+    margin-bottom:20px;
+    padding:clamp(24px,4vw,56px) clamp(20px,4vw,64px);
+    min-height:auto;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--cinza-claro);
+  }
+  @media (min-width:900px){
+    .slide{ min-height:680px; }
+    .deck{ padding:32px 24px 80px; }
+  }
+  .slide.cover{
+    background:var(--preto);
+    color:var(--offwhite);
+    justify-content:space-between;
+  }
+  .slide.accent{
+    background:var(--amarelo);
+    color:var(--preto);
+  }
+  .slide.dark{
+    background:var(--preto);
+    color:var(--offwhite);
+  }
+
+  /* HEADER do slide */
+  .slide-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--cinza);
+    font-weight:700;
+    margin-bottom:24px;
+  }
+  .slide.cover .slide-meta,
+  .slide.dark .slide-meta{ color:rgba(250,250,248,.5); }
+  .slide.accent .slide-meta{ color:rgba(17,17,17,.55); }
+
+  .badge{
+    display:inline-block;
+    background:var(--amarelo);
+    color:var(--preto);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:99px;
+  }
+  .slide.dark .badge,
+  .slide.cover .badge{ background:var(--amarelo); color:var(--preto);}
+
+  /* TITLES — fluid sizes for mobile */
+  h1.slide-title{
+    font-size:clamp(36px,7vw,64px);
+    font-weight:900;
+    letter-spacing:-2px;
+    line-height:1.02;
+    margin-bottom:16px;
+    word-break:break-word;
+  }
+  h2.slide-title{
+    font-size:clamp(28px,5vw,44px);
+    font-weight:900;
+    letter-spacing:-1.5px;
+    line-height:1.08;
+    margin-bottom:20px;
+    word-break:break-word;
+  }
+  h3{
+    font-size:clamp(18px,3vw,22px);
+    font-weight:800;
+    letter-spacing:-.4px;
+    margin:24px 0 10px;
+  }
+  h4{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--cinza);
+    margin:18px 0 8px;
+  }
+  .slide.dark h4, .slide.cover h4{ color:rgba(250,250,248,.55);}
+
+  p{ font-size:clamp(15px,2.2vw,17px); line-height:1.55; color:#1f1f1f; }
+  .slide.dark p, .slide.cover p{ color:rgba(250,250,248,.85);}
+  .lead{
+    font-size:clamp(16px,2.6vw,22px);
+    line-height:1.45;
+    color:var(--cinza);
+    max-width:900px;
+    font-weight:500;
+  }
+  .slide.dark .lead, .slide.cover .lead{ color:rgba(250,250,248,.7);}
+
+  ul,ol{ padding-left:0; list-style:none; }
+  li{
+    font-size:clamp(14px,2.2vw,17px);
+    line-height:1.55;
+    margin-bottom:10px;
+    padding-left:24px;
+    position:relative;
+    word-break:break-word;
+  }
+  li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:11px;
+    width:8px;
+    height:8px;
+    background:var(--amarelo);
+    border-radius:2px;
+  }
+  .slide.accent li::before{ background:var(--preto);}
+
+  strong{ font-weight:800; }
+  em{ color:var(--verde); font-style:normal; font-weight:600; }
+
+  /* CAPA */
+  .cover-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .logo-mark{
+    width:clamp(44px,6vw,56px);
+    height:clamp(44px,6vw,56px);
+    background:var(--amarelo);
+    color:var(--preto);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:clamp(24px,4vw,30px);
+    letter-spacing:-1.5px;
+    flex-shrink:0;
+  }
+  .cover h1{
+    font-size:clamp(48px,11vw,84px);
+    font-weight:900;
+    letter-spacing:-3px;
+    line-height:1;
+    margin-top:36px;
+    word-break:break-word;
+  }
+  .cover h1 span{ color:var(--amarelo); }
+  .cover .tagline{
+    font-size:clamp(16px,2.8vw,24px);
+    color:rgba(250,250,248,.7);
+    margin-top:16px;
+    max-width:780px;
+  }
+  .cover-bottom{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:36px;
+    padding-top:20px;
+    border-top:1px solid rgba(250,250,248,.15);
+  }
+  @media (min-width:700px){
+    .cover-bottom{ grid-template-columns:repeat(4,1fr); gap:24px; margin-top:48px;}
+  }
+  .cover-bottom div{ font-size:13px; color:rgba(250,250,248,.55); letter-spacing:.5px;}
+  .cover-bottom strong{ display:block; color:var(--offwhite); font-size:15px; margin-bottom:4px; letter-spacing:0; font-weight:700;}
+
+  /* GRIDS — mobile-first */
+  .grid-2{ display:grid; grid-template-columns:1fr; gap:20px; margin-top:24px; }
+  .grid-3{ display:grid; grid-template-columns:1fr; gap:16px; margin-top:24px; }
+  .grid-4{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:24px; }
+  @media (min-width:700px){
+    .grid-2{ grid-template-columns:1fr 1fr; gap:32px;}
+    .grid-3{ grid-template-columns:repeat(3,1fr); gap:20px;}
+    .grid-4{ grid-template-columns:repeat(4,1fr); gap:16px;}
+  }
+
+  .stat{
+    background:#fff;
+    border:1px solid var(--cinza-claro);
+    border-radius:12px;
+    padding:20px;
+  }
+  .stat .num{
+    font-size:clamp(32px,5vw,42px);
+    font-weight:900;
+    letter-spacing:-1.5px;
+    line-height:1;
+    color:var(--preto);
+    word-break:break-word;
+  }
+  .stat .label{
+    font-size:13px;
+    color:var(--cinza);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+    margin-top:10px;
+  }
+  .stat .desc{ font-size:14px; color:#444; margin-top:8px; line-height:1.4;}
+
+  .stat.yellow{ background:var(--amarelo); border-color:var(--amarelo);}
+  .stat.dark{ background:var(--preto); color:var(--offwhite); border-color:var(--preto);}
+  .stat.dark .num{ color:var(--amarelo);}
+  .stat.dark .label{ color:rgba(250,250,248,.55);}
+  .stat.dark .desc{ color:rgba(250,250,248,.75);}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--cinza-claro);
+    border-radius:12px;
+    padding:24px;
+  }
+  .card-icon{
+    width:42px;height:42px;
+    background:var(--amarelo);
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;color:var(--preto);
+    margin-bottom:14px;
+    font-size:20px;
+  }
+  .card.dark{ background:var(--preto); color:var(--offwhite); border-color:var(--preto);}
+  .card.dark .card-icon{ background:var(--amarelo); color:var(--preto);}
+
+  /* TABLE — wrap em scroll horizontal no mobile */
+  .table-wrap{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin-top:18px;
+    border-radius:10px;
+    border:1px solid var(--cinza-claro);
+  }
+  table{
+    width:100%;
+    min-width:520px;
+    border-collapse:collapse;
+    font-size:clamp(12px,2vw,14px);
+    background:#fff;
+  }
+  th{
+    text-align:left;
+    background:var(--preto);
+    color:var(--offwhite);
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:12px 14px;
+    white-space:nowrap;
+  }
+  td{
+    padding:11px 14px;
+    border-top:1px solid var(--cinza-claro);
+    color:#1f1f1f;
+  }
+  tr:nth-child(even) td{ background:#fafaf6;}
+  td.right, th.right{ text-align:right; }
+  td.center, th.center{ text-align:center; }
+  td.strong{ font-weight:700;}
+  tr.total td{ background:var(--amarelo); font-weight:800; border-top:2px solid var(--preto);}
+
+  /* TIMELINE */
+  .timeline{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-top:32px;
+  }
+  @media (min-width:900px){
+    .timeline{ grid-template-columns:repeat(4,1fr); gap:0;}
+  }
+  .tl-step{
+    border-left:3px solid var(--amarelo);
+    padding:0 18px;
+    position:relative;
+  }
+  .tl-step:first-child{ border-left:3px solid var(--preto);}
+  .tl-step::before{
+    content:"";
+    position:absolute;
+    top:-6px;left:-9px;
+    width:14px;height:14px;
+    background:var(--amarelo);
+    border-radius:99px;
+    border:3px solid var(--offwhite);
+  }
+  .tl-step:first-child::before{ background:var(--preto);}
+  .tl-step h4{ margin-top:6px; color:var(--preto);}
+  .tl-step .month{
+    font-size:11px;
+    color:var(--cinza);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+  }
+  .tl-step ul{ margin-top:8px;}
+  .tl-step li{ font-size:14px; padding-left:18px;}
+  .tl-step li::before{ width:5px;height:5px; top:9px; }
+
+  /* CALLOUT */
+  .callout{
+    background:var(--preto);
+    color:var(--offwhite);
+    border-radius:12px;
+    padding:24px 28px;
+    margin-top:24px;
+    border-left:6px solid var(--amarelo);
+  }
+  .callout p{ color:rgba(250,250,248,.9); font-size:18px;}
+  .callout strong{ color:var(--amarelo);}
+
+  /* PILL */
+  .pills{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .pill{
+    background:#fff;
+    border:1px solid var(--cinza-claro);
+    color:var(--preto);
+    padding:6px 12px;
+    border-radius:99px;
+    font-size:13px;
+    font-weight:600;
+  }
+  .pill.dark{ background:var(--preto); color:var(--offwhite); border-color:var(--preto);}
+  .pill.yellow{ background:var(--amarelo); border-color:var(--amarelo);}
+
+  /* RODAPÉ DO SLIDE */
+  .slide-footer{
+    margin-top:auto;
+    padding-top:32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:12px;
+    letter-spacing:.5px;
+    color:var(--cinza);
+    border-top:1px solid var(--cinza-claro);
+  }
+  .slide.dark .slide-footer, .slide.cover .slide-footer{ color:rgba(250,250,248,.45); border-color:rgba(250,250,248,.1);}
+  .slide.accent .slide-footer{ color:rgba(17,17,17,.55); border-color:rgba(17,17,17,.15);}
+
+  /* NAV — pílula no rodapé, compacta no mobile */
+  .nav-bar{
+    position:fixed;
+    bottom:14px;left:50%;
+    transform:translateX(-50%);
+    background:var(--preto);
+    color:var(--offwhite);
+    border-radius:99px;
+    padding:6px 6px 6px 14px;
+    display:flex;align-items:center;gap:8px;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+    z-index:50;
+    font-size:12px;
+    font-weight:600;
+    max-width:calc(100vw - 24px);
+    flex-wrap:nowrap;
+  }
+  .nav-bar button{
+    background:var(--amarelo);
+    color:var(--preto);
+    border:0;
+    border-radius:99px;
+    padding:8px 12px;
+    font-weight:700;
+    font-size:12px;
+    cursor:pointer;
+    font-family:inherit;
+    white-space:nowrap;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .nav-bar button.ghost{
+    background:transparent;
+    color:var(--offwhite);
+    border:1px solid rgba(250,250,248,.2);
+  }
+  .nav-bar .counter{ color:rgba(250,250,248,.6); white-space:nowrap; min-width:48px; text-align:center;}
+  .nav-bar .print-btn{ display:none;}
+  @media (min-width:700px){
+    .nav-bar{ font-size:13px; padding:8px 8px 8px 18px; gap:10px; bottom:18px;}
+    .nav-bar button{ padding:8px 14px; font-size:13px;}
+    .nav-bar .print-btn{ display:inline-block;}
+  }
+
+  /* PRINT */
+  @page{ size:A4 landscape; margin:0; }
+  @media print{
+    html,body{ background:#fff; }
+    .deck{ padding:0; max-width:none;}
+    .slide{
+      page-break-after:always;
+      margin:0; border-radius:0;
+      box-shadow:none; border:none;
+      min-height:100vh;
+      padding:48px 56px;
+    }
+    .nav-bar{ display:none;}
+  }
+
+  /* RODAPÉ + META compactos no mobile */
+  .slide-meta{ font-size:10px; gap:8px; flex-wrap:wrap;}
+  .slide-footer{ font-size:11px; padding-top:24px; gap:8px; flex-wrap:wrap;}
+  @media (min-width:700px){
+    .slide-meta{ font-size:11px;}
+    .slide-footer{ font-size:12px; padding-top:32px;}
+  }
+  /* Pills + cards padding ajustado */
+  .pill{ font-size:12px; padding:5px 10px;}
+  .card{ padding:18px;}
+  @media (min-width:700px){
+    .pill{ font-size:13px; padding:6px 12px;}
+    .card{ padding:24px;}
+  }
+  /* Print btn class hook on the print button */
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- 1. CAPA -->
+<section class="slide cover">
+  <div class="cover-top">
+    <div class="logo-mark">F</div>
+    <div>
+      <div style="font-weight:800;font-size:18px;letter-spacing:-.5px">Facilite<span style="color:var(--amarelo)">.ai</span></div>
+      <div style="font-size:13px;color:rgba(250,250,248,.55)">Curitiba/PR · 2026</div>
+    </div>
+  </div>
+
+  <div>
+    <span class="badge">Plano de negócio · v2.0</span>
+    <h1>Plano de<br/>Negócio<span>.</span></h1>
+    <p class="tagline">O Uber do garçom: marketplace de mão de obra sob demanda para o food service de Curitiba, via WhatsApp + IA.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <div><strong>Mercado</strong>R$ 470 bi/ano</div>
+    <div><strong>Meta 90 dias</strong>500 usuários</div>
+    <div><strong>Investimento</strong>R$ 41.690</div>
+    <div><strong>Take rate</strong>10% sobre vaga</div>
+  </div>
+</section>
+
+<!-- 2. ÍNDICE -->
+<section class="slide">
+  <div class="slide-meta"><span>Sumário</span><span>02 / 14</span></div>
+  <h2 class="slide-title">Conteúdo da apresentação.</h2>
+  <p class="lead">Tudo que você precisa saber para entender o negócio, o caminho até os primeiros 500 usuários e a projeção de retorno.</p>
+
+  <div class="grid-2" style="margin-top:36px">
+    <div>
+      <ol style="list-style:decimal inside;">
+        <li style="padding-left:0">Sumário executivo</li>
+        <li style="padding-left:0">Problema e solução</li>
+        <li style="padding-left:0">Mercado de Curitiba</li>
+        <li style="padding-left:0">Modelo de receita</li>
+        <li style="padding-left:0">Diferenciais defensáveis</li>
+        <li style="padding-left:0">Como atinge 500 usuários em 90 dias</li>
+        <li style="padding-left:0">Faturamento projetado</li>
+      </ol>
+    </div>
+    <div>
+      <ol style="list-style:decimal inside;" start="8">
+        <li style="padding-left:0">Estrutura de custos</li>
+        <li style="padding-left:0">Necessidade de capital</li>
+        <li style="padding-left:0">Roadmap 12 meses</li>
+        <li style="padding-left:0">Time e contratações</li>
+        <li style="padding-left:0">KPIs e métricas-norte</li>
+        <li style="padding-left:0">Riscos e mitigações</li>
+        <li style="padding-left:0">Visão de longo prazo</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>02 / 14</span></div>
+</section>
+
+<!-- 3. SUMÁRIO EXECUTIVO -->
+<section class="slide">
+  <div class="slide-meta"><span>01 · Sumário executivo</span><span>03 / 14</span></div>
+  <h2 class="slide-title">O que é a Facilite.ai.</h2>
+  <p class="lead">O marketplace de mão de obra sob demanda do food service. Restaurante manda mensagem no WhatsApp, recebe 3 perfis qualificados em menos de 5 minutos, paga via PIX intermediado.</p>
+
+  <div class="grid-3">
+    <div class="stat dark">
+      <div class="num">5min</div>
+      <div class="label">Tempo de matching</div>
+      <div class="desc">Da mensagem ao perfil pronto para fechar.</div>
+    </div>
+    <div class="stat yellow">
+      <div class="num">10%</div>
+      <div class="label">Take rate por vaga</div>
+      <div class="desc">Cobrado por cima do valor — autônomo recebe valor cheio.</div>
+    </div>
+    <div class="stat">
+      <div class="num">R$ 67</div>
+      <div class="label">Selo Facilite (mensal)</div>
+      <div class="desc">Assinatura opcional — prioridade no matching.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Posicionamento:</strong> O mesmo modelo que validou Uber e iFood, aplicado a um vertical com R$ 470 bi/ano e 38% de turnover anual. Curitiba primeiro, capital onde o fundador opera.</p>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>03 / 14</span></div>
+</section>
+
+<!-- 4. PROBLEMA E SOLUÇÃO -->
+<section class="slide">
+  <div class="slide-meta"><span>02 · Problema e solução</span><span>04 / 14</span></div>
+  <h2 class="slide-title">Dois lados, uma dor.</h2>
+
+  <div class="grid-2" style="margin-top:24px">
+    <div>
+      <h3>Restaurante</h3>
+      <ul>
+        <li>38% de rotatividade anual no setor</li>
+        <li>Faltas de última hora derrubam avaliação no Google e iFood</li>
+        <li>Indicação por WhatsApp leva de 30 min a 2 horas</li>
+        <li>Catho/Gupy/Indeed são lentos e focados em CLT, não em sob demanda</li>
+        <li>CLT é caro e arriscado para picos (sábado, eventos, feriado)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Autônomo</h3>
+      <ul>
+        <li>Sem visibilidade — depende de bico de amigo</li>
+        <li>Calote frequente: paga "no fim do turno" e às vezes não paga</li>
+        <li>Sem reputação acumulada — começa do zero a cada novo restaurante</li>
+        <li>Sem proteção contra estabelecimento abusivo</li>
+        <li>Sem controle de quanto trabalhou no mês</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">Como a Facilite.ai resolve</h3>
+  <div class="grid-4" style="margin-top:18px">
+    <div class="card">
+      <div class="card-icon">1</div>
+      <strong>Mensagem no WhatsApp</strong>
+      <p style="font-size:14px;margin-top:6px;color:#444">"Preciso de garçom amanhã 18h–23h em Batel"</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">2</div>
+      <strong>IA faz matching</strong>
+      <p style="font-size:14px;margin-top:6px;color:#444">Cruza disponibilidade, bairro, categoria e nota</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">3</div>
+      <strong>3 perfis em 5min</strong>
+      <p style="font-size:14px;margin-top:6px;color:#444">Foto, nota, valor, distância — pronto pra fechar</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">4</div>
+      <strong>PIX + avaliação</strong>
+      <p style="font-size:14px;margin-top:6px;color:#444">Pagamento intermediado, ambos avaliam 1–5 estrelas</p>
+    </div>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>04 / 14</span></div>
+</section>
+
+<!-- 5. MERCADO -->
+<section class="slide">
+  <div class="slide-meta"><span>03 · Mercado</span><span>05 / 14</span></div>
+  <h2 class="slide-title">Curitiba é a base. O Brasil é a escala.</h2>
+
+  <div class="grid-3" style="margin-top:24px">
+    <div class="stat">
+      <div class="num">R$ 470 bi</div>
+      <div class="label">Food service no Brasil</div>
+      <div class="desc">4,8% do PIB · crescimento 8,2% a.a.</div>
+    </div>
+    <div class="stat">
+      <div class="num">7.800</div>
+      <div class="label">Bares e restaurantes em Curitiba/RMC</div>
+      <div class="desc">SOM realista para os primeiros 36 meses</div>
+    </div>
+    <div class="stat">
+      <div class="num">42 mil</div>
+      <div class="label">Autônomos em Curitiba/RMC</div>
+      <div class="desc">Garçons, cozinheiros, bartenders, copeiros</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Bairros priorizados</h3>
+  <div class="pills">
+    <span class="pill yellow">Tier 1 · Batel</span>
+    <span class="pill yellow">Água Verde</span>
+    <span class="pill yellow">Bigorrilho</span>
+    <span class="pill yellow">Centro</span>
+    <span class="pill yellow">São Francisco</span>
+    <span class="pill yellow">Alto da XV</span>
+    <span class="pill yellow">Cabral</span>
+    <span class="pill yellow">Juvevê</span>
+    <span class="pill">Tier 2 · Mercês</span>
+    <span class="pill">Champagnat</span>
+    <span class="pill">Ecoville</span>
+    <span class="pill">Portão</span>
+    <span class="pill">Cristo Rei</span>
+    <span class="pill">Rebouças</span>
+    <span class="pill dark">Tier 3 · Santa Felicidade</span>
+    <span class="pill dark">CIC</span>
+    <span class="pill dark">Pinhais</span>
+    <span class="pill dark">São José dos Pinhais</span>
+  </div>
+
+  <div class="callout">
+    <p>WhatsApp tem <strong>169 milhões</strong> de usuários ativos no Brasil e <strong>98%</strong> dos restaurantes o usam para operação. É o canal certo, no formato certo, na hora certa.</p>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>05 / 14</span></div>
+</section>
+
+<!-- 6. MODELO DE RECEITA -->
+<section class="slide">
+  <div class="slide-meta"><span>04 · Modelo de receita</span><span>06 / 14</span></div>
+  <h2 class="slide-title">Cinco fontes. Uma só matemática.</h2>
+  <p class="lead">Marketplace de 2 lados monetiza pelos dois lados, em ondas — primeiro liquidez, depois take rate, depois extras.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Fonte</th>
+        <th>Quem paga</th>
+        <th>Mecânica</th>
+        <th class="right">Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">Take rate</td>
+        <td>Restaurante</td>
+        <td>10% por cima do valor da vaga</td>
+        <td class="right strong">10%</td>
+      </tr>
+      <tr>
+        <td class="strong">Selo Facilite</td>
+        <td>Autônomo</td>
+        <td>Assinatura mensal — prioridade no matching</td>
+        <td class="right strong">R$ 67/mês</td>
+      </tr>
+      <tr>
+        <td class="strong">Plano PRO</td>
+        <td>Restaurante</td>
+        <td>Fila prioritária, sem limite de vagas, analytics</td>
+        <td class="right strong">R$ 299/mês</td>
+      </tr>
+      <tr>
+        <td class="strong">Anúncios destacados</td>
+        <td>Restaurante</td>
+        <td>"Vaga em destaque" no topo das ofertas</td>
+        <td class="right strong">R$ 19,90/post</td>
+      </tr>
+      <tr>
+        <td class="strong">Marketplace de equipamentos</td>
+        <td>Fornecedor</td>
+        <td>Revenue share em uniformes, cursos, ferramentas</td>
+        <td class="right strong">8 a 15%</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <p><strong>Take rate explicado:</strong> autônomo cobra R$ 200 pelo turno → restaurante paga R$ 220 → Facilite fica com R$ 20. Autônomo recebe valor cheio. Modelo idêntico ao iFood: simples e transparente.</p>
+  </div>
+
+  <div class="grid-2" style="margin-top:24px">
+    <div class="card">
+      <h4 style="margin:0 0 8px">Onda 1 · Mês 1–3</h4>
+      <strong>Selo apenas</strong>
+      <p style="font-size:14px;margin-top:6px;color:#444">Take rate zerado para acelerar liquidez do marketplace.</p>
+    </div>
+    <div class="card dark">
+      <h4 style="margin:0 0 8px">Onda 2 · Mês 4–9</h4>
+      <strong>Selo + 5% take rate</strong>
+      <p style="font-size:14px;margin-top:6px;">Testar elasticidade antes de cobrar 10% cheio.</p>
+    </div>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>06 / 14</span></div>
+</section>
+
+<!-- 7. DIFERENCIAIS -->
+<section class="slide accent">
+  <div class="slide-meta"><span>05 · Diferenciais</span><span>07 / 14</span></div>
+  <h2 class="slide-title">Por que ganha.</h2>
+  <p class="lead" style="color:rgba(17,17,17,.7)">Quatro vantagens que se reforçam. Cada uma sozinha não basta. Juntas, são fosso.</p>
+
+  <div class="grid-2" style="margin-top:32px">
+    <div>
+      <h4>WhatsApp-first</h4>
+      <p>98% dos restaurantes já usam. Zero atrito de download de app, zero curva de aprendizado, zero treinamento da equipe. O canal já é o canal.</p>
+
+      <h4 style="margin-top:24px">IA determinística</h4>
+      <p>State-machine controla 100% do fluxo. OpenAI usada apenas em 3 pontos: classificação de intent, FAQ e extração de data/hora. Custo por conversa: <strong>R$ 0,005</strong>. Debugável e auditável.</p>
+    </div>
+    <div>
+      <h4>Vertical food service profundo</h4>
+      <p>Categorização específica (garçom, bartender, sushiman, churrasqueiro, copeiro, hostess), não é GetNinjas genérico. Saber o domínio gera matching melhor.</p>
+
+      <h4 style="margin-top:24px">PIX intermediado</h4>
+      <p>Elimina o calote do autônomo — calcanhar de Aquiles do mercado informal. Restaurante deposita antes, plataforma libera após confirmação do turno.</p>
+    </div>
+  </div>
+
+  <div class="slide-footer" style="border-color:rgba(17,17,17,.2)"><span>Facilite.ai · Plano de Negócio</span><span>07 / 14</span></div>
+</section>
+
+<!-- 8. PLANO 90 DIAS -->
+<section class="slide">
+  <div class="slide-meta"><span>06 · Aquisição 90 dias</span><span>08 / 14</span></div>
+  <h2 class="slide-title">De 0 a 500 usuários em 90 dias.</h2>
+  <p class="lead">Distribuição alvo 80/20 entre autônomos e restaurantes. O lado da oferta precisa estar pronto antes da demanda chegar — senão o marketplace falha por falta de liquidez.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Segmento</th>
+        <th class="center">Mês 1</th>
+        <th class="center">Mês 2</th>
+        <th class="center">Mês 3</th>
+        <th class="center">Total 90d</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">Autônomos cadastrados</td>
+        <td class="center">60</td>
+        <td class="center">130</td>
+        <td class="center">220</td>
+        <td class="center strong">410</td>
+      </tr>
+      <tr>
+        <td class="strong">Restaurantes cadastrados</td>
+        <td class="center">12</td>
+        <td class="center">28</td>
+        <td class="center">50</td>
+        <td class="center strong">90</td>
+      </tr>
+      <tr class="total">
+        <td>TOTAL DE USUÁRIOS</td>
+        <td class="center">72</td>
+        <td class="center">158</td>
+        <td class="center">270</td>
+        <td class="center">500</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3 style="margin-top:36px">Canais de aquisição — autônomos (lado oferta)</h3>
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Canal</th>
+        <th class="right">Investimento</th>
+        <th class="right">Volume 90d</th>
+        <th class="right">CAC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Field marketing em Senac PR, Centro Europeu, IFPR</td><td class="right">R$ 1.500</td><td class="right">120</td><td class="right">R$ 12</td></tr>
+      <tr><td>Infiltração em grupos de WhatsApp (orgânico)</td><td class="right">R$ 0</td><td class="right">90</td><td class="right">R$ 0</td></tr>
+      <tr><td>Programa de indicação (3 amigos = 1 mês Selo grátis)</td><td class="right">R$ 0</td><td class="right">70</td><td class="right">R$ 0</td></tr>
+      <tr><td>Conteúdo orgânico TikTok / Instagram</td><td class="right">R$ 800</td><td class="right">80</td><td class="right">R$ 10</td></tr>
+      <tr><td>Meta Ads segmentado</td><td class="right">R$ 1.800</td><td class="right">50</td><td class="right">R$ 36</td></tr>
+      <tr class="total"><td>SUBTOTAL OFERTA</td><td class="right">R$ 4.100</td><td class="right">410</td><td class="right">R$ 10</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>08 / 14</span></div>
+</section>
+
+<!-- 9. AQUISIÇÃO RESTAURANTES -->
+<section class="slide">
+  <div class="slide-meta"><span>06 · Aquisição 90 dias</span><span>09 / 14</span></div>
+  <h2 class="slide-title">Lado da demanda: 90 restaurantes.</h2>
+  <p class="lead">Mais caro por unidade, mas LTV justifica. Foco geográfico nos Tier 1 (Batel, Água Verde, Bigorrilho) gera densidade de transações e prova de conceito visível.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Canal</th>
+        <th class="right">Investimento</th>
+        <th class="right">Volume 90d</th>
+        <th class="right">CAC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Outbound porta-a-porta Tier 1 Curitiba (entre turnos)</td><td class="right">R$ 1.000</td><td class="right">35</td><td class="right">R$ 28</td></tr>
+      <tr><td>Parceria Abrasel-PR (institucional)</td><td class="right">R$ 0</td><td class="right">20</td><td class="right">R$ 0</td></tr>
+      <tr><td>Meta Ads B2B (cargo dono/gerente)</td><td class="right">R$ 2.500</td><td class="right">18</td><td class="right">R$ 139</td></tr>
+      <tr><td>Google Ads Search ("contratar garçom Curitiba")</td><td class="right">R$ 1.500</td><td class="right">10</td><td class="right">R$ 150</td></tr>
+      <tr><td>Caso de uso viral (grupos Facebook)</td><td class="right">R$ 0</td><td class="right">7</td><td class="right">R$ 0</td></tr>
+      <tr class="total"><td>SUBTOTAL DEMANDA</td><td class="right">R$ 5.000</td><td class="right">90</td><td class="right">R$ 56</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="grid-3" style="margin-top:32px">
+    <div class="stat yellow">
+      <div class="num">R$ 11.100</div>
+      <div class="label">Marketing 90 dias (total)</div>
+    </div>
+    <div class="stat dark">
+      <div class="num">R$ 22</div>
+      <div class="label">CAC blended</div>
+      <div class="desc">Custo ponderado por usuário</div>
+    </div>
+    <div class="stat">
+      <div class="num">20:1</div>
+      <div class="label">LTV : CAC</div>
+      <div class="desc">LTV mínimo R$ 480 / CAC R$ 22</div>
+    </div>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>09 / 14</span></div>
+</section>
+
+<!-- 10. FATURAMENTO -->
+<section class="slide dark">
+  <div class="slide-meta"><span>07 · Faturamento</span><span>10 / 14</span></div>
+  <h2 class="slide-title" style="color:var(--offwhite)">Receita projetada.</h2>
+  <p class="lead">Cenário conservador (take rate desligado nos primeiros 90 dias) e cenário simulado (com take rate ligado desde dia 1).</p>
+
+  <h4>Cenário conservador · take rate 0% mês 1–3</h4>
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Métrica</th>
+        <th class="right">Mês 1</th>
+        <th class="right">Mês 2</th>
+        <th class="right">Mês 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Vagas postadas</td><td class="right">24</td><td class="right">96</td><td class="right">270</td></tr>
+      <tr><td>GMV (vagas × R$ 180)</td><td class="right">R$ 4.320</td><td class="right">R$ 17.280</td><td class="right">R$ 48.600</td></tr>
+      <tr><td>Selos ativos (12% conversão)</td><td class="right">7</td><td class="right">23</td><td class="right">49</td></tr>
+      <tr><td>Receita Selo</td><td class="right">R$ 469</td><td class="right">R$ 1.541</td><td class="right">R$ 3.283</td></tr>
+      <tr><td>Take rate (zerado)</td><td class="right">R$ 0</td><td class="right">R$ 0</td><td class="right">R$ 0</td></tr>
+      <tr class="total"><td>RECEITA TOTAL MENSAL</td><td class="right">R$ 469</td><td class="right">R$ 1.541</td><td class="right">R$ 3.283</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4 style="margin-top:30px">Cenário simulado · "se monetizasse desde o dia 1"</h4>
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Métrica</th>
+        <th class="right">Mês 1</th>
+        <th class="right">Mês 2</th>
+        <th class="right">Mês 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Take rate 10% sobre GMV</td><td class="right">R$ 432</td><td class="right">R$ 1.728</td><td class="right">R$ 4.860</td></tr>
+      <tr><td>Receita Selo</td><td class="right">R$ 469</td><td class="right">R$ 1.541</td><td class="right">R$ 3.283</td></tr>
+      <tr class="total"><td>RECEITA TOTAL MENSAL</td><td class="right">R$ 901</td><td class="right">R$ 3.269</td><td class="right">R$ 8.143</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout" style="background:var(--amarelo);border-left-color:var(--preto)">
+    <p style="color:var(--preto)"><strong>R$ 8.143/mês</strong> é o run-rate que a operação atinge no fim do mês 3. A partir daí, com take rate ligado e estrutura escalando, o caminho para R$ 50K MRR no mês 12 está aberto.</p>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>10 / 14</span></div>
+</section>
+
+<!-- 11. CUSTOS + CAPITAL -->
+<section class="slide">
+  <div class="slide-meta"><span>08 · Custos e capital</span><span>11 / 14</span></div>
+  <h2 class="slide-title">Onde vai o dinheiro.</h2>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Categoria</th>
+        <th class="right">Mês 1</th>
+        <th class="right">Mês 2</th>
+        <th class="right">Mês 3</th>
+        <th class="right">Total 90d</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Infraestrutura (Cloudflare + Supabase + OpenAI)</td><td class="right">R$ 300</td><td class="right">R$ 500</td><td class="right">R$ 800</td><td class="right">R$ 1.600</td></tr>
+      <tr><td>WhatsApp Business API (Meta)</td><td class="right">R$ 400</td><td class="right">R$ 800</td><td class="right">R$ 1.200</td><td class="right">R$ 2.400</td></tr>
+      <tr><td>BotConversa (operação atual)</td><td class="right">R$ 250</td><td class="right">R$ 250</td><td class="right">R$ 250</td><td class="right">R$ 750</td></tr>
+      <tr><td>Equipe (fundador + 1 ops PJ)</td><td class="right">R$ 6.000</td><td class="right">R$ 6.000</td><td class="right">R$ 8.000</td><td class="right">R$ 20.000</td></tr>
+      <tr><td>Marketing + aquisição</td><td class="right">R$ 3.700</td><td class="right">R$ 3.700</td><td class="right">R$ 3.700</td><td class="right">R$ 11.100</td></tr>
+      <tr><td>Jurídico/contábil</td><td class="right">R$ 500</td><td class="right">R$ 500</td><td class="right">R$ 800</td><td class="right">R$ 1.800</td></tr>
+      <tr><td>Gateway PIX</td><td class="right">R$ 0</td><td class="right">R$ 50</td><td class="right">R$ 200</td><td class="right">R$ 250</td></tr>
+      <tr><td>Reserva de contingência (10%)</td><td class="right">R$ 1.115</td><td class="right">R$ 1.180</td><td class="right">R$ 1.495</td><td class="right">R$ 3.790</td></tr>
+      <tr class="total"><td>CUSTO TOTAL</td><td class="right">R$ 12.265</td><td class="right">R$ 12.980</td><td class="right">R$ 16.445</td><td class="right">R$ 41.690</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="grid-3" style="margin-top:24px">
+    <div class="stat dark">
+      <div class="num">R$ 41.690</div>
+      <div class="label">Investimento 90 dias</div>
+    </div>
+    <div class="stat">
+      <div class="num">R$ 5.293</div>
+      <div class="label">Receita 90 dias (cenário conservador)</div>
+    </div>
+    <div class="stat yellow">
+      <div class="num">R$ 36.397</div>
+      <div class="label">Caixa requerido</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Fontes de capital recomendadas</h3>
+  <ul>
+    <li><strong>Bootstrap fundador (R$ 40K)</strong> — cobre os 90 dias com folga, sem diluição.</li>
+    <li><strong>Edital Centelha/Sebrae (R$ 60K)</strong> — subvenção econômica não-reembolsável, 90–120 dias para liberação.</li>
+    <li><strong>Aceleradora (Hotmilk, Tecpar, Vale do Pinhão) — R$ 20–50K</strong> em troca de 5–8% equity.</li>
+    <li><strong>FFF · family, friends, fools — R$ 50–80K</strong> via SAFE (cap R$ 8M, discount 20%) se acelerar mês 4.</li>
+  </ul>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>11 / 14</span></div>
+</section>
+
+<!-- 12. ROADMAP -->
+<section class="slide">
+  <div class="slide-meta"><span>09 · Roadmap 12 meses</span><span>12 / 14</span></div>
+  <h2 class="slide-title">O caminho até R$ 50K MRR.</h2>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="month">Q2 2026 · Mês 1–3</div>
+      <h4>Validação</h4>
+      <ul>
+        <li>500 usuários (410 autônomos + 90 restaurantes)</li>
+        <li>Pagamento PIX intermediado</li>
+        <li>Sistema de avaliação 1–5 estrelas</li>
+        <li>Painel admin com métricas</li>
+      </ul>
+    </div>
+    <div class="tl-step">
+      <div class="month">Q3 2026 · Mês 4–6</div>
+      <h4>Tração</h4>
+      <ul>
+        <li>Take rate 5% ligado</li>
+        <li>1.200 autônomos / 250 restaurantes</li>
+        <li>R$ 10K MRR</li>
+        <li>Migração 100% Cloud API</li>
+      </ul>
+    </div>
+    <div class="tl-step">
+      <div class="month">Q4 2026 · Mês 7–9</div>
+      <h4>Pré-seed</h4>
+      <ul>
+        <li>2.300 autônomos / 500 restaurantes</li>
+        <li>R$ 25K MRR · take rate 10% cheio</li>
+        <li>Captação R$ 80–150K (FFF/anjo)</li>
+      </ul>
+    </div>
+    <div class="tl-step">
+      <div class="month">Q1 2027 · Mês 10–12</div>
+      <h4>Escala</h4>
+      <ul>
+        <li>3.800 autônomos / 850 restaurantes</li>
+        <li>R$ 50K MRR</li>
+        <li>Marketplace de equipamentos</li>
+        <li>Início Joinville e Florianópolis</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Ano 2 (mês 24):</strong> R$ 280K MRR · ARR R$ 3,3M · expansão para Porto Alegre, BH e Rio. <strong>Ano 3:</strong> R$ 700K MRR · ARR R$ 5,7M · 5 capitais ativas.</p>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>12 / 14</span></div>
+</section>
+
+<!-- 13. KPIs + RISCOS -->
+<section class="slide">
+  <div class="slide-meta"><span>10 · KPIs e riscos</span><span>13 / 14</span></div>
+  <h2 class="slide-title">Como medir e como se proteger.</h2>
+
+  <div class="grid-2">
+    <div>
+      <h3>Métricas-norte</h3>
+      <h4>Saúde do produto</h4>
+      <ul>
+        <li>Tempo médio de matching: <strong>&lt; 5 min</strong></li>
+        <li>Taxa de no-show do autônomo: <strong>&lt; 8%</strong></li>
+        <li>NPS restaurante e autônomo: <strong>&gt; 60</strong></li>
+        <li>Liquidez: % de vagas com ≥ 3 candidatos em &lt; 5min</li>
+      </ul>
+      <h4>Saúde do negócio</h4>
+      <ul>
+        <li>MRR · GMV · Take rate efetiva</li>
+        <li>NRR: <strong>&gt; 110%</strong></li>
+        <li>Churn mensal: <strong>&lt; 5%</strong></li>
+        <li>CAC payback: <strong>&lt; 4 meses</strong></li>
+        <li>LTV : CAC: <strong>&gt; 3:1</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Riscos e mitigações</h3>
+      <div class="table-wrap"><table style="font-size:13px">
+        <thead>
+          <tr><th>Risco</th><th>Mitigação</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Meta restringir WhatsApp API</td><td>Telegram + web app + SMS de fallback</td></tr>
+          <tr><td>iFood/99 entrar no nicho</td><td>Velocidade · vertical profundo · contratos Tier 1</td></tr>
+          <tr><td>Calote de restaurante</td><td>Pré-pagamento integral + escrow</td></tr>
+          <tr><td>Reclassificação trabalhista</td><td>Termos robustos + jurídico de plataforma</td></tr>
+          <tr><td>Vazamento LGPD</td><td>AES-256-GCM + RLS deny-all + DPO</td></tr>
+          <tr><td>Custo Meta Ads explodir</td><td>Foco em orgânico e indicação (CAC R$ 0)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="slide-footer"><span>Facilite.ai · Plano de Negócio</span><span>13 / 14</span></div>
+</section>
+
+<!-- 14. FECHAMENTO -->
+<section class="slide accent">
+  <div class="slide-meta"><span>11 · Conclusão</span><span>14 / 14</span></div>
+  <h2 class="slide-title">Por que agora.</h2>
+
+  <div class="grid-2" style="margin-top:24px">
+    <div>
+      <p style="font-size:20px;line-height:1.5">A dor é validada. O mercado é gigante. O canal (WhatsApp) tem 98% de adoção. A tecnologia já está em produção. O modelo de receita é o mesmo do Uber e iFood.</p>
+      <p style="font-size:20px;line-height:1.5;margin-top:14px">Falta apenas execução nos primeiros 90 dias.</p>
+
+      <div style="margin-top:32px">
+        <h4 style="color:rgba(17,17,17,.6)">Investimento</h4>
+        <div style="font-size:48px;font-weight:900;letter-spacing:-1.5px;line-height:1">R$ 41.690</div>
+        <p style="font-size:14px;color:rgba(17,17,17,.7);margin-top:6px">Caixa total para 90 dias · cobertura via bootstrap + edital</p>
+      </div>
+    </div>
+    <div>
+      <div style="background:var(--preto);color:var(--offwhite);padding:32px;border-radius:14px">
+        <h4 style="color:rgba(250,250,248,.5)">Em 90 dias</h4>
+        <ul>
+          <li><strong>500 usuários ativos</strong> (410 autônomos + 90 restaurantes)</li>
+          <li><strong>270 vagas/mês</strong> rodando</li>
+          <li><strong>R$ 48.600 de GMV</strong> mensal</li>
+          <li><strong>R$ 8.143/mês</strong> de receita potencial (take rate ligado)</li>
+          <li><strong>CAC R$ 22</strong> · LTV:CAC <strong>20:1</strong></li>
+        </ul>
+
+        <h4 style="color:rgba(250,250,248,.5);margin-top:24px">Em 12 meses</h4>
+        <ul>
+          <li><strong>R$ 50K MRR</strong></li>
+          <li><strong>4.000 autônomos</strong> · <strong>850 restaurantes</strong></li>
+          <li>Pronto para captação seed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer" style="border-color:rgba(17,17,17,.2)">
+    <span>Facilite.ai · Curitiba/PR · 2026</span>
+    <span>14 / 14</span>
+  </div>
+</section>
+
+</div>
+
+<!-- BARRA DE NAVEGAÇÃO -->
+<div class="nav-bar" id="nav">
+  <button class="ghost" onclick="prev()">← Anterior</button>
+  <span class="counter" id="counter">1 / 14</span>
+  <button onclick="next()">Próximo →</button>
+  <button class="ghost print-btn" onclick="window.print()">Imprimir / PDF</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+  function go(i){
+    cur = Math.max(0, Math.min(slides.length-1, i));
+    slides[cur].scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('counter').textContent = (cur+1)+' / '+slides.length;
+  }
+  function next(){ go(cur+1); }
+  function prev(){ go(cur-1); }
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown') next();
+    if(e.key==='ArrowLeft' || e.key==='PageUp') prev();
+    if(e.key==='Home') go(0);
+    if(e.key==='End') go(slides.length-1);
+  });
+  // Atualiza contador conforme rola
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = Array.from(slides).indexOf(e.target);
+        if(idx>=0){
+          cur = idx;
+          document.getElementById('counter').textContent = (idx+1)+' / '+slides.length;
+        }
+      }
+    });
+  }, {threshold:0.5});
+  slides.forEach(s=>obs.observe(s));
+</script>
+
+</body>
+</html>
