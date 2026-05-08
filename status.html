@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Facilite.ai — Status do Projeto · Maio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0E12;
+    --bg-2:#15151B;
+    --bg-3:#1c1c25;
+    --text:#F5F5F0;
+    --muted:#8a8a90;
+    --line:#2a2a35;
+    --amarelo:#f5c518;
+    --verde:#00c67a;
+    --vermelho:#ff5d5d;
+    --laranja:#ff9933;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;min-width:0}
+  html,body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Helvetica Neue,sans-serif;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    width:100%;
+    overflow-x:hidden;
+  }
+  body{ min-height:100vh; max-width:100vw; }
+  img,svg,table{ max-width:100%; }
+
+  /* Header fixo */
+  .top-bar{
+    position:fixed; top:0; left:0; right:0;
+    background:rgba(14,14,18,.85);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    z-index:100;
+    padding:10px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:12px;
+    letter-spacing:.5px;
+  }
+  .top-bar .brand{
+    display:flex; align-items:center; gap:10px;
+    font-weight:800;
+  }
+  .brand-mark{
+    width:24px;height:24px;
+    background:var(--amarelo);
+    color:var(--bg);
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:14px;
+  }
+  .brand-name{ font-size:13px; }
+  .brand-name span{ color:var(--amarelo); }
+  .top-bar .crumb{ color:var(--muted); font-weight:600; }
+  .top-bar .counter{
+    color:var(--text);
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* SLIDES */
+  .deck{ padding-top:48px; }
+  .slide{
+    min-height:100vh;
+    padding:clamp(28px,5vw,72px);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .slide.cover{
+    justify-content:space-between;
+    background:radial-gradient(circle at 20% 0%, rgba(245,197,24,.08) 0%, transparent 50%),
+               radial-gradient(circle at 80% 100%, rgba(0,198,122,.06) 0%, transparent 50%),
+               var(--bg);
+  }
+
+  /* Tipografia */
+  h1{
+    font-size:clamp(40px,8vw,84px);
+    font-weight:900;
+    letter-spacing:-3px;
+    line-height:1;
+  }
+  h2{
+    font-size:clamp(28px,5vw,52px);
+    font-weight:900;
+    letter-spacing:-1.6px;
+    line-height:1.05;
+    margin-bottom:18px;
+  }
+  h3{
+    font-size:clamp(18px,2.6vw,24px);
+    font-weight:800;
+    letter-spacing:-.4px;
+    margin:26px 0 12px;
+  }
+  h4{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:18px 0 8px;
+  }
+  p{ font-size:clamp(14px,2.1vw,17px); line-height:1.55; }
+  .lead{
+    font-size:clamp(16px,2.5vw,22px);
+    line-height:1.45;
+    color:#cccccc;
+    max-width:980px;
+    font-weight:500;
+  }
+  strong{ font-weight:700; color:var(--text); }
+
+  /* CAPA */
+  .cover-top{ display:flex; align-items:center; gap:14px; }
+  .cover h1{ margin-top:24px; }
+  .cover h1 span{ color:var(--amarelo); }
+  .cover .tagline{
+    font-size:clamp(16px,2.6vw,24px);
+    color:var(--muted);
+    margin-top:14px;
+    max-width:780px;
+    font-weight:500;
+  }
+  .cover-bottom{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:40px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--muted);
+  }
+  .cover-bottom strong{ display:block; color:var(--text); font-size:15px; margin-bottom:4px; font-weight:700;}
+  @media (min-width:720px){
+    .cover-bottom{ grid-template-columns:repeat(4,1fr); gap:24px;}
+  }
+
+  /* GRIDS */
+  .grid-2{ display:grid; grid-template-columns:1fr; gap:18px; margin-top:18px; }
+  .grid-3{ display:grid; grid-template-columns:1fr; gap:14px; margin-top:18px; }
+  .grid-4{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:18px; }
+  @media (min-width:720px){
+    .grid-2{ grid-template-columns:1fr 1fr; gap:28px;}
+    .grid-3{ grid-template-columns:repeat(3,1fr); gap:18px;}
+    .grid-4{ grid-template-columns:repeat(4,1fr); gap:16px;}
+  }
+
+  /* Cards */
+  .card{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+  }
+  .card.accent{ border-color:var(--amarelo); background:linear-gradient(145deg, rgba(245,197,24,.08), transparent);}
+  .card .num{
+    font-size:clamp(28px,4.5vw,40px);
+    font-weight:900;
+    letter-spacing:-1.5px;
+    line-height:1;
+    color:var(--amarelo);
+  }
+  .card .num.green{ color:var(--verde);}
+  .card .num.red{ color:var(--vermelho);}
+  .card .num.text{ color:var(--text);}
+  .card .label{
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+    margin-top:10px;
+  }
+  .card .desc{ font-size:14px; color:#bbbbbb; margin-top:8px; line-height:1.4;}
+
+  /* Listas */
+  ul,ol{ padding-left:0; list-style:none; }
+  li{
+    font-size:clamp(14px,2.1vw,16px);
+    line-height:1.55;
+    margin-bottom:8px;
+    padding-left:22px;
+    position:relative;
+    word-break:break-word;
+  }
+  li::before{
+    content:"•";
+    position:absolute;
+    left:0; top:0;
+    color:var(--amarelo);
+    font-weight:900;
+  }
+  li.green::before{ color:var(--verde);}
+  li.red::before{ color:var(--vermelho);}
+  li.orange::before{ color:var(--laranja);}
+
+  /* Tabelas */
+  .table-wrap{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin-top:18px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+  }
+  table{
+    width:100%;
+    min-width:600px;
+    border-collapse:collapse;
+    font-size:clamp(12px,1.9vw,14px);
+  }
+  th{
+    text-align:left;
+    background:var(--bg-3);
+    color:var(--text);
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:11px 14px;
+    white-space:nowrap;
+    border-bottom:1px solid var(--line);
+  }
+  td{
+    padding:11px 14px;
+    border-top:1px solid var(--line);
+    color:#dcdcdc;
+    vertical-align:top;
+  }
+  td.right, th.right{ text-align:right; font-variant-numeric:tabular-nums;}
+  td.center, th.center{ text-align:center; }
+  td.strong{ color:var(--text); font-weight:700;}
+  tr.total td{ background:rgba(245,197,24,.08); font-weight:700; color:var(--text); border-top:1px solid var(--amarelo);}
+
+  /* Status pills */
+  .status{
+    display:inline-block;
+    padding:3px 9px;
+    border-radius:99px;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .status.live{ background:rgba(0,198,122,.15); color:var(--verde); border:1px solid rgba(0,198,122,.3);}
+  .status.wip{ background:rgba(255,153,51,.15); color:var(--laranja); border:1px solid rgba(255,153,51,.3);}
+  .status.blocked{ background:rgba(255,93,93,.15); color:var(--vermelho); border:1px solid rgba(255,93,93,.3);}
+  .status.todo{ background:rgba(138,138,144,.15); color:var(--muted); border:1px solid var(--line);}
+
+  /* Callout */
+  .callout{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-left:4px solid var(--amarelo);
+    border-radius:10px;
+    padding:18px 22px;
+    margin-top:22px;
+  }
+  .callout.warn{ border-left-color:var(--vermelho);}
+  .callout.ok{ border-left-color:var(--verde);}
+  .callout p{ font-size:clamp(14px,2vw,17px);}
+  .callout strong{ color:var(--amarelo);}
+
+  /* Fonte/footer slide */
+  .source{
+    margin-top:auto;
+    padding-top:22px;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.5px;
+    border-top:1px solid var(--line);
+  }
+  .source code{
+    background:var(--bg-3);
+    padding:2px 6px;
+    border-radius:4px;
+    font-size:10px;
+    color:var(--amarelo);
+  }
+
+  /* Bar chart CSS puro */
+  .bar-chart{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:22px;
+  }
+  .bar-row{
+    display:grid;
+    grid-template-columns:80px 1fr auto;
+    gap:14px;
+    align-items:center;
+    font-size:13px;
+  }
+  .bar-row .lbl{ color:var(--muted); font-weight:600; text-align:right; font-size:12px;}
+  .bar-row .val{ color:var(--text); font-weight:700; min-width:90px; text-align:right; font-variant-numeric:tabular-nums; font-size:12px;}
+  .bar-track{
+    height:22px;
+    background:var(--bg-3);
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+  }
+  .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--amarelo), #ffce3a);
+    border-radius:4px;
+    transition:width .3s;
+  }
+  .bar-fill.green{ background:linear-gradient(90deg, var(--verde), #2eddb0);}
+  .bar-fill.red{ background:linear-gradient(90deg, var(--vermelho), #ff8888);}
+
+  /* Print */
+  @page{ size:A4 landscape; margin:0; }
+  @media print{
+    html,body{ background:#fff; color:#111;}
+    .top-bar{ display:none;}
+    .deck{ padding-top:0;}
+    .slide{
+      page-break-after:always;
+      min-height:auto;
+      padding:42px 56px;
+      border:none;
+      background:#fff !important;
+      color:#111;
+    }
+    .card{ background:#f8f8f5; border-color:#e0e0d8; color:#111;}
+    .card .num{ color:#111;}
+    h1, h2, h3{ color:#111;}
+    .lead{ color:#444;}
+    .muted, .source{ color:#777;}
+    table th{ background:#111; color:#fff;}
+    table td{ color:#222;}
+    .nav-bar{ display:none;}
+  }
+
+  /* Nav helper bottom */
+  .nav-help{
+    position:fixed; bottom:14px; left:50%;
+    transform:translateX(-50%);
+    background:rgba(14,14,18,.92);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--line);
+    color:var(--muted);
+    border-radius:99px;
+    padding:7px 14px;
+    font-size:11px;
+    font-weight:600;
+    z-index:90;
+    pointer-events:none;
+    opacity:.7;
+  }
+  .nav-help kbd{
+    background:var(--bg-3);
+    color:var(--text);
+    padding:2px 6px;
+    border-radius:4px;
+    font-family:inherit;
+    font-size:10px;
+    border:1px solid var(--line);
+  }
+  @media (max-width:720px){ .nav-help{ display:none;} }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">
+    <div class="brand-mark">F</div>
+    <div class="brand-name">Facilite<span>.ai</span></div>
+  </div>
+  <div class="crumb" id="crumb">Capa</div>
+  <div class="counter" id="counter">1 / 15</div>
+</div>
+
+<div class="deck">
+
+<!-- 1. CAPA -->
+<section class="slide cover" data-title="Capa">
+  <div class="cover-top">
+    <div class="brand-mark" style="width:48px;height:48px;font-size:26px;border-radius:12px;">F</div>
+    <div>
+      <div style="font-size:18px;font-weight:800;letter-spacing:-.5px">Facilite<span style="color:var(--amarelo)">.ai</span></div>
+      <div style="font-size:12px;color:var(--muted)">Curitiba/PR · Status interno</div>
+    </div>
+  </div>
+
+  <div>
+    <span style="display:inline-block;background:var(--amarelo);color:var(--bg);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:99px;">Status do projeto · Maio 2026</span>
+    <h1 style="margin-top:20px">Status do<br/>Projeto<span style="color:var(--amarelo)">.</span></h1>
+    <p class="tagline">Onde estamos, onde travamos, o que vem agora. Sem floreio. Documento interno para os sócios.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <div><strong>Praça-piloto</strong>Curitiba/PR</div>
+    <div><strong>Estágio</strong>Pré-MVP / bot em bridge</div>
+    <div><strong>Receita atual</strong>R$ 0 (zero)</div>
+    <div><strong>Autor</strong>Leandro Lima</div>
+  </div>
+</section>
+
+<!-- 2. RESUMO EXECUTIVO -->
+<section class="slide" data-title="Resumo executivo">
+  <h2>Resumo executivo.</h2>
+  <p class="lead">Três linhas. Sem rodeio.</p>
+
+  <div class="grid-3" style="margin-top:32px">
+    <div class="card">
+      <h4>O que existe hoje</h4>
+      <p style="font-size:17px;color:var(--text);font-weight:600;line-height:1.4">Site live em <code style="color:var(--amarelo);background:var(--bg-3);padding:2px 6px;border-radius:4px">facilite.ai</code>, dashboard admin no ar, bot WhatsApp completo (6 fluxos, 59 testes) rodando em VPS Docker via Evolution API.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--laranja)">Onde estamos travados</h4>
+      <p style="font-size:17px;color:var(--text);font-weight:600;line-height:1.4">CNPJ pendente, Meta WhatsApp Cloud API oficial em revisão (rodando hoje pela Evo bridge), conta de PIX intermediação não escolhida e zero tráfego pago testado em escala.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--vermelho)">Quanto pra destravar</h4>
+      <p style="font-size:17px;color:var(--text);font-weight:600;line-height:1.4"><strong style="color:var(--amarelo)">R$ 28.587 em 90 dias</strong> · sócios cobrem operação · 100% do caixa novo vai para anúncios pagos (Meta, Google, TikTok, LinkedIn) com meta de 500 usuários e primeira transação real.</p>
+    </div>
+  </div>
+
+  <div class="source">Fonte: <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §8</code> · <code>CLAUDE.md</code> raiz · <code>apps/whatsapp-bot/src/index.ts:50-58</code></div>
+</section>
+
+<!-- 3. PROBLEMA + MERCADO -->
+<section class="slide" data-title="Problema + Mercado">
+  <h2>Problema. Mercado.</h2>
+  <p class="lead">Food service no Brasil sangra mão de obra. A demanda é estrutural — não é hype.</p>
+
+  <div class="grid-3" style="margin-top:28px">
+    <div class="card accent">
+      <div class="num">38%</div>
+      <div class="label">Turnover anual food service</div>
+      <p style="font-size:13px;margin-top:10px;color:#bbb">Maior do varejo brasileiro. Cada restaurante troca 4 em cada 10 funcionários por ano.</p>
+    </div>
+    <div class="card">
+      <div class="num text">235k</div>
+      <div class="label">Déficit projetado 2026</div>
+      <p style="font-size:13px;margin-top:10px;color:#bbb">Estimativa Abrasel. Restaurante abre vaga e fica meses sem preencher.</p>
+    </div>
+    <div class="card">
+      <div class="num text">R$ 470 bi</div>
+      <div class="label">Tamanho do setor (Brasil)</div>
+      <p style="font-size:13px;margin-top:10px;color:#bbb">4,8% do PIB. Crescimento 8,2% a.a. pós-pandemia.</p>
+    </div>
+  </div>
+
+  <h3>Curitiba como praça-piloto</h3>
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Métrica</th>
+        <th>Tamanho</th>
+        <th>Fonte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">TAM (Brasil — bares, restaurantes, lanchonetes)</td>
+        <td>~1,3 milhão de estabelecimentos</td>
+        <td>Abrasel 2024</td>
+      </tr>
+      <tr>
+        <td class="strong">SAM (Brasil — capitais, 5+ funcionários)</td>
+        <td>~280 mil estabelecimentos</td>
+        <td>IBGE PMS</td>
+      </tr>
+      <tr>
+        <td class="strong">SOM Curitiba + RMC</td>
+        <td>~7.800 estabelecimentos</td>
+        <td>Abrasel-PR · estimativa</td>
+      </tr>
+      <tr>
+        <td class="strong">Autônomos Curitiba + RMC</td>
+        <td>~42.000 profissionais</td>
+        <td>CAGED · estimativa</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="source">Fonte: <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §4.1</code> · <code>README.md:15</code></div>
+</section>
+
+<!-- 4. SOLUÇÃO -->
+<section class="slide" data-title="Solução">
+  <h2>Solução em 1 frame.</h2>
+  <p class="lead">Restaurante manda WhatsApp. Bot coleta vaga. IA faz matching. Autônomo aceita. PIX intermediado. Tempo alvo: menos de 5 minutos.</p>
+
+  <div class="grid-4" style="margin-top:32px">
+    <div class="card">
+      <div style="font-size:28px;font-weight:900;color:var(--amarelo);line-height:1">01</div>
+      <h4 style="color:var(--text);margin:8px 0 6px">Mensagem</h4>
+      <p style="font-size:13px;color:#bbb">"Preciso de garçom amanhã 18h–23h em Batel"</p>
+    </div>
+    <div class="card">
+      <div style="font-size:28px;font-weight:900;color:var(--amarelo);line-height:1">02</div>
+      <h4 style="color:var(--text);margin:8px 0 6px">Coleta</h4>
+      <p style="font-size:13px;color:#bbb">Bot extrai categoria, data, bairro, valor, quantidade — Zod valida</p>
+    </div>
+    <div class="card">
+      <div style="font-size:28px;font-weight:900;color:var(--amarelo);line-height:1">03</div>
+      <h4 style="color:var(--text);margin:8px 0 6px">Matching IA</h4>
+      <p style="font-size:13px;color:#bbb">Edge Function Supabase cruza disponibilidade + bairro + nota + valor</p>
+    </div>
+    <div class="card">
+      <div style="font-size:28px;font-weight:900;color:var(--amarelo);line-height:1">04</div>
+      <h4 style="color:var(--text);margin:8px 0 6px">PIX + nota</h4>
+      <p style="font-size:13px;color:#bbb">Pagamento intermediado · ambos avaliam 1–5 estrelas</p>
+    </div>
+  </div>
+
+  <h3>Diferenciais</h3>
+  <ul style="margin-top:8px">
+    <li class="green"><strong>Zero app</strong> — 98% dos restaurantes já usam WhatsApp na operação</li>
+    <li class="green"><strong>Zero mensalidade</strong> — paga só quando contrata (modelo Uber/iFood)</li>
+    <li class="green"><strong>IA determinística</strong> — state-machine + OpenAI em 3 pontos · custo R$ 0,005/conversa</li>
+    <li class="green"><strong>PIX intermediado</strong> — restaurante deposita antes, plataforma libera após confirmação · elimina calote</li>
+    <li class="green"><strong>Vertical food service</strong> — categorização específica (garçom, bartender, sushiman, churrasqueiro), não é GetNinjas genérico</li>
+  </ul>
+
+  <div class="source">Fonte: <code>apps/whatsapp-bot/src/flows/</code> · <code>supabase/functions/matching</code> · <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §3</code></div>
+</section>
+
+<!-- 5. O QUE JÁ ESTÁ CONSTRUÍDO -->
+<section class="slide" data-title="O que está pronto">
+  <h2>O que JÁ está construído.</h2>
+  <p class="lead">Auditoria interna do código em 08/05/2026.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Componente</th>
+        <th class="center">Estado</th>
+        <th>URL / Observação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">Site institucional</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td><code>facilite.ai</code> · 11 rotas · TanStack Start SSR · VPS Docker via build-vps.yml</td>
+      </tr>
+      <tr>
+        <td class="strong">Dashboard admin</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td><code>dashboard.facilite.ai</code> · standalone (Lovable) · adapter Supabase com fallback localStorage</td>
+      </tr>
+      <tr>
+        <td class="strong">Bot WhatsApp (6 fluxos)</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td><code>bot.facilite.ai</code> · onboarding, cadastro-rest, cadastro-aut, vaga, oferta, FAQ · <code>PROVIDER=evo + AGENT_MODE=flows</code></td>
+      </tr>
+      <tr>
+        <td class="strong">Supabase Postgres</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>3 migrations · RLS deny-all · audit_log triggers · CHECK constraints</td>
+      </tr>
+      <tr>
+        <td class="strong">Edge Functions</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td><code>matching</code> + <code>reservar</code> · rodam fora do Worker · timeout 10s</td>
+      </tr>
+      <tr>
+        <td class="strong">Criptografia PII</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>AES-256-GCM at-rest em CPF, CNPJ, chave_pix · Web Crypto · formato <code>v1:base64(iv||ct||tag)</code></td>
+      </tr>
+      <tr>
+        <td class="strong">Testes automatizados</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>59 testes Vitest passando · cobre todos os fluxos · 2 arquivos com import quebrado (deps)</td>
+      </tr>
+      <tr>
+        <td class="strong">CI/CD</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>build-vps.yml ativo · Docker GHCR + Traefik VPS · 3 workflows Cloudflare em standby</td>
+      </tr>
+      <tr>
+        <td class="strong">Brand kit</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>10 logos SVG · ícones · paleta · social media · banco de 202 imagens stock em 19 categorias</td>
+      </tr>
+      <tr>
+        <td class="strong">Equipe Claude (subagentes)</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>8 specialists · ~8.4k linhas de KB em <code>docs/equipe-agentes/</code></td>
+      </tr>
+      <tr>
+        <td class="strong">KB BotConversa</td>
+        <td class="center"><span class="status live">Live</span></td>
+        <td>20 docs em <code>docs/botconversa-knowledge/</code> (referência de bridge MVP)</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="source">Fonte: <code>apps/whatsapp-bot/src/</code> · <code>SECURITY.md §A02-A05</code> · <code>.github/workflows/build-vps.yml</code> · <code>brand/README.md</code></div>
+</section>
+
+<!-- 6. O QUE NÃO ESTÁ PRONTO -->
+<section class="slide" data-title="Bloqueios">
+  <h2>O que NÃO está pronto.</h2>
+  <p class="lead">Gargalos honestos. Cada item: bloqueio · ação · responsável · ETA.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th class="center">Status</th>
+        <th>Bloqueio · Ação · Responsável · ETA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">CNPJ Facilite Tecnologia Ltda</td>
+        <td class="center"><span class="status blocked">Bloqueio</span></td>
+        <td><strong>Bloqueio:</strong> [PREENCHER: status atual com a contadora] · <strong>Ação:</strong> finalizar contrato social + abrir conta PJ · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> [PREENCHER]</td>
+      </tr>
+      <tr>
+        <td class="strong">Meta WhatsApp Cloud API oficial</td>
+        <td class="center"><span class="status wip">Em revisão</span></td>
+        <td><strong>Bloqueio:</strong> número WABA em sandbox · revisão de negócio na Meta pendente · <strong>Ação:</strong> rodando hoje pela Evolution API (PROVIDER=evo) como bridge · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> [PREENCHER: depende da aprovação Meta]</td>
+      </tr>
+      <tr>
+        <td class="strong">Conta PIX intermediação</td>
+        <td class="center"><span class="status blocked">Bloqueio</span></td>
+        <td><strong>Bloqueio:</strong> escolha de gateway pendente (Asaas vs Pagar.me vs Stripe BR) · <strong>Ação:</strong> testar sandbox dos 3 e decidir · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> 14 dias</td>
+      </tr>
+      <tr>
+        <td class="strong">Volume de tráfego pago testado</td>
+        <td class="center"><span class="status todo">Não iniciado</span></td>
+        <td><strong>Bloqueio:</strong> bot em <code>MOCK_AI=true</code> default · sem CPL real medido · <strong>Ação:</strong> ligar ads R$ 200/dia em Meta + Google por 7 dias · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> 30 dias após CNPJ</td>
+      </tr>
+      <tr>
+        <td class="strong">Pagamento dos autônomos via PIX</td>
+        <td class="center"><span class="status blocked">Bloqueio</span></td>
+        <td><strong>Bloqueio:</strong> depende de gateway escolhido + CNPJ ativo · <strong>Ação:</strong> integrar webhook do gateway escolhido com Edge Function <code>reservar</code> · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> 30 dias após gateway</td>
+      </tr>
+      <tr>
+        <td class="strong">Pesquisa de validação (20 entrevistas)</td>
+        <td class="center"><span class="status todo">Não iniciado</span></td>
+        <td><strong>Bloqueio:</strong> roteiro pronto, zero entrevistas feitas · <strong>Ação:</strong> 10 restaurantes Tier 1 + 10 autônomos em 14 dias · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> 14 dias</td>
+      </tr>
+      <tr>
+        <td class="strong">Sistema de avaliação 1–5 estrelas</td>
+        <td class="center"><span class="status wip">Parcial</span></td>
+        <td><strong>Bloqueio:</strong> schema pronto · UI no admin pendente · <strong>Ação:</strong> implementar tela em <code>apps/dash</code> · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> 21 dias</td>
+      </tr>
+      <tr>
+        <td class="strong">Cutover BotConversa → Cloud API</td>
+        <td class="center"><span class="status wip">Em paralelo</span></td>
+        <td><strong>Bloqueio:</strong> aguarda aprovação Meta · BotConversa cobre fluxo simples enquanto isso · <strong>Ação:</strong> migrar todos contatos quando aprovação sair · <strong>Resp.:</strong> Leandro · <strong>ETA:</strong> 30 dias após Meta liberar</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn">
+    <p><strong>Tradução crua:</strong> a tecnologia está em pé. O que prende o lançamento real é <strong>burocracia (CNPJ + Meta + gateway)</strong>. Sem isso, o bot pode rodar mas não pode cobrar nem repassar dinheiro.</p>
+  </div>
+
+  <div class="source">Fonte: <code>apps/whatsapp-bot/src/handlers/incoming.ts</code> · <code>src/handlers/chat-test.ts:42</code> · <code>docs/PESQUISA_VALIDACAO.md</code></div>
+</section>
+
+<!-- 7. MODELO DE RECEITA -->
+<section class="slide" data-title="Modelo de receita">
+  <h2>Modelo de receita.</h2>
+  <p class="lead">Take rate puro sobre vaga concretizada. Sem assinatura, sem mensalidade obrigatória.</p>
+
+  <div class="grid-3" style="margin-top:24px">
+    <div class="card accent">
+      <div class="num">10%</div>
+      <div class="label">Take rate sobre vaga</div>
+      <p style="font-size:13px;margin-top:10px;color:#bbb">Cobrado por cima do valor — autônomo recebe valor cheio.</p>
+    </div>
+    <div class="card">
+      <div class="num text">R$ 180</div>
+      <div class="label">Ticket médio Curitiba</div>
+      <p style="font-size:13px;margin-top:10px;color:#bbb">Turno 6h × R$ 25–30/h. Fonte: modelo financeiro.</p>
+    </div>
+    <div class="card">
+      <div class="num text">R$ 18</div>
+      <div class="label">Receita por vaga</div>
+      <p style="font-size:13px;margin-top:10px;color:#bbb">10% × R$ 180. Embutido no preço cobrado do restaurante.</p>
+    </div>
+  </div>
+
+  <h3>Como o cálculo funciona</h3>
+  <div class="callout">
+    <p><strong>Exemplo real:</strong> autônomo cobra <strong>R$ 200</strong> pelo turno → restaurante paga <strong>R$ 220</strong> via PIX intermediado → Facilite.ai recebe <strong>R$ 20</strong> (10%) → autônomo recebe <strong>R$ 200 cheios</strong> em D+1.</p>
+  </div>
+
+  <h3>Receitas secundárias (futuro)</h3>
+  <ul>
+    <li><strong>Selo Facilite</strong> · R$ 67/mês · assinatura opcional autônomo · prioriza no matching · 12% de adesão prevista</li>
+    <li><strong>Plano PRO restaurante</strong> · R$ 299/mês · fila prioritária + analytics + sem limite · ativa após base de 200 restaurantes</li>
+    <li><strong>Anúncios destacados</strong> · R$ 19,90/post · "Vaga em destaque" no topo</li>
+    <li><strong>Marketplace de equipamentos/uniformes/cursos</strong> · 8 a 15% revenue share</li>
+  </ul>
+
+  <div class="source">Fonte: <code>docs/financeiro/MODELO_FINANCEIRO.csv:6-13</code> · <code>docs/financeiro/CLAUDE.md</code> · <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §5</code> · ⚠️ NOTA: CSV original está com 3% (premissa inicial); take rate atualizado para 10% no plano consolidado v2</div>
+</section>
+
+<!-- 8. PROJEÇÃO DE FATURAMENTO -->
+<section class="slide" data-title="Projeção 12/24/36">
+  <h2>Projeção de faturamento.</h2>
+  <p class="lead">Cenário base do <code style="color:var(--amarelo);background:var(--bg-3);padding:2px 6px;border-radius:4px">MODELO_FINANCEIRO.csv</code> recalculado com take rate 10% (CSV original usa 3%).</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Mês</th>
+        <th class="right">Vagas/mês</th>
+        <th class="right">Ticket</th>
+        <th class="right">GMV</th>
+        <th class="right">Take 10%</th>
+        <th class="right">Selo</th>
+        <th class="right">Receita total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">M3</td>
+        <td class="right">270</td>
+        <td class="right">R$ 180</td>
+        <td class="right">R$ 48.600</td>
+        <td class="right">R$ 4.860</td>
+        <td class="right">R$ 3.283</td>
+        <td class="right strong">R$ 8.143</td>
+      </tr>
+      <tr>
+        <td class="strong">M6</td>
+        <td class="right">520</td>
+        <td class="right">R$ 180</td>
+        <td class="right">R$ 93.600</td>
+        <td class="right">R$ 9.360</td>
+        <td class="right">R$ 9.648</td>
+        <td class="right strong">R$ 19.008</td>
+      </tr>
+      <tr>
+        <td class="strong">M12</td>
+        <td class="right">2.520</td>
+        <td class="right">R$ 180</td>
+        <td class="right">R$ 453.600</td>
+        <td class="right">R$ 45.360</td>
+        <td class="right">R$ 45.828</td>
+        <td class="right strong">R$ 91.188</td>
+      </tr>
+      <tr>
+        <td class="strong">M24</td>
+        <td class="right">10.920</td>
+        <td class="right">R$ 180</td>
+        <td class="right">R$ 1.965.600</td>
+        <td class="right">R$ 196.560</td>
+        <td class="right">R$ 205.020</td>
+        <td class="right strong">R$ 401.580</td>
+      </tr>
+      <tr class="total">
+        <td>M36</td>
+        <td class="right">25.080</td>
+        <td class="right">R$ 180</td>
+        <td class="right">R$ 4.514.400</td>
+        <td class="right">R$ 451.440</td>
+        <td class="right">R$ 479.988</td>
+        <td class="right">R$ 931.428</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Comparação visual de cenários (receita mensal)</h3>
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="lbl">Mês 3</div>
+      <div class="bar-track"><div class="bar-fill" style="width:1%"></div></div>
+      <div class="val">R$ 8K</div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl">Mês 6</div>
+      <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+      <div class="val">R$ 19K</div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl">Mês 12</div>
+      <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
+      <div class="val">R$ 91K</div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl">Mês 18</div>
+      <div class="bar-track"><div class="bar-fill green" style="width:24%"></div></div>
+      <div class="val">R$ 220K</div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl">Mês 24</div>
+      <div class="bar-track"><div class="bar-fill green" style="width:43%"></div></div>
+      <div class="val">R$ 401K</div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl">Mês 36</div>
+      <div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div>
+      <div class="val">R$ 931K</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Marcos do CSV:</strong> breakeven mensal mês 13 · breakeven acumulado mês 19 · ARR mês 18 = R$ 1,33M · ARR mês 36 = R$ 5,76M.</p>
+  </div>
+
+  <div class="source">Fonte: <code>docs/financeiro/MODELO_FINANCEIRO.csv:18-50</code> (recalculado para take rate 10%)</div>
+</section>
+
+<!-- 9. UNIT ECONOMICS -->
+<section class="slide" data-title="Unit economics">
+  <h2>Unit economics.</h2>
+  <p class="lead">CAC, LTV, payback. Antes de R$ 200/dia em ads testados, todo número aqui é estimativa de mercado.</p>
+
+  <div class="grid-4" style="margin-top:24px">
+    <div class="card">
+      <div class="num">R$ 53</div>
+      <div class="label">CAC blended (estimado)</div>
+      <p style="font-size:12px;margin-top:8px;color:#aaa">R$ 24K em ads ÷ 500 usuários previstos</p>
+    </div>
+    <div class="card">
+      <div class="num text">R$ 480</div>
+      <div class="label">LTV mínimo (autônomo Selo)</div>
+      <p style="font-size:12px;margin-top:8px;color:#aaa">R$ 67 × 7,2 meses (1/churn 14%)</p>
+    </div>
+    <div class="card">
+      <div class="num green">9 : 1</div>
+      <div class="label">LTV : CAC</div>
+      <p style="font-size:12px;margin-top:8px;color:#aaa">Acima do limite saudável de 3:1</p>
+    </div>
+    <div class="card">
+      <div class="num text">~3 m</div>
+      <div class="label">Payback (CAC)</div>
+      <p style="font-size:12px;margin-top:8px;color:#aaa">R$ 53 CAC ÷ R$ 18 receita/vaga × ~3 vagas</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Cada R$ 1 em ads paga R$ 9 em [12 a 18] meses</strong> — assumindo churn 5% mensal e 4 vagas/restaurante/mês. <em style="color:var(--laranja)">[PREENCHER: substituir após 30 dias de tráfego pago real]</em></p>
+  </div>
+
+  <h3>Como vamos medir</h3>
+  <ul>
+    <li><strong>CAC real</strong>: total gasto em ads (Meta + Google + TikTok + LinkedIn) ÷ usuários cadastrados via UTM</li>
+    <li><strong>LTV real</strong>: receita acumulada por usuário até o churn (rastreado em Supabase via <code>contacts.created_at</code> + <code>vagas</code> agregadas)</li>
+    <li><strong>Payback real</strong>: dias até receita acumulada = CAC, por coorte mensal</li>
+  </ul>
+
+  <div class="source">Fonte: <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §15</code> · estimativas baseadas em CSV churn 5% · <em>nenhum dado real medido até hoje</em></div>
+</section>
+
+<!-- 10. INVESTIMENTO EM TRÁFEGO PAGO -->
+<section class="slide" data-title="Tráfego pago">
+  <h2>Investimento em tráfego pago.</h2>
+  <p class="lead">Decisão dos sócios: <strong style="color:var(--amarelo)">100% do caixa novo vai pra ads</strong>. Sócios cobrem operação (equipe, conteúdo orgânico, eventos, materiais) sem retirada de pró-labore.</p>
+
+  <div class="grid-2" style="margin-top:24px">
+    <div>
+      <h3>Investimento já feito em ads</h3>
+      <div class="card">
+        <div class="num red">R$ 0</div>
+        <div class="label">Total gasto em ads até hoje</div>
+        <p style="font-size:13px;margin-top:10px;color:#bbb"><em style="color:var(--laranja)">[PREENCHER: confirmar nas contas Meta Business + Google Ads]</em></p>
+      </div>
+      <h3 style="margin-top:24px">Métricas atuais</h3>
+      <ul>
+        <li><strong>CTR:</strong> <em style="color:var(--laranja)">[PREENCHER]</em> — sem campanha rodando</li>
+        <li><strong>CPL:</strong> <em style="color:var(--laranja)">[PREENCHER]</em></li>
+        <li><strong>CPA:</strong> <em style="color:var(--laranja)">[PREENCHER]</em></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Plano próximos 90 dias</h3>
+      <div class="table-wrap"><table>
+        <thead>
+          <tr>
+            <th>Mês</th>
+            <th class="right">Autônomos</th>
+            <th class="right">Restaurantes</th>
+            <th class="right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="strong">M1</td><td class="right">R$ 3.000</td><td class="right">R$ 3.000</td><td class="right">R$ 6.000</td></tr>
+          <tr><td class="strong">M2</td><td class="right">R$ 4.000</td><td class="right">R$ 4.000</td><td class="right">R$ 8.000</td></tr>
+          <tr><td class="strong">M3</td><td class="right">R$ 5.000</td><td class="right">R$ 5.000</td><td class="right">R$ 10.000</td></tr>
+          <tr class="total"><td>Total 90d</td><td class="right">R$ 12.000</td><td class="right">R$ 12.000</td><td class="right">R$ 24.000</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13px;margin-top:14px;color:#bbb">Mês 1 começa menor por causa da fase de aprendizado da Meta — o algoritmo precisa de pelo menos 50 conversões/conjunto antes de otimizar.</p>
+    </div>
+  </div>
+
+  <h3>Meta de leads</h3>
+  <ul>
+    <li><strong>Mês 1:</strong> 5 leads/dia (pixel calibrando) · CPL alvo R$ 40</li>
+    <li><strong>Mês 2:</strong> 10 leads/dia · CPL alvo R$ 27</li>
+    <li><strong>Mês 3:</strong> 16 leads/dia · CPL alvo R$ 22</li>
+  </ul>
+
+  <div class="source">Fonte: <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §6</code> (commit "foco 100% em anúncios pagos") · <em>números reais a coletar após primeiros 30 dias rodando</em></div>
+</section>
+
+<!-- 11. PLANO DE EXPANSÃO -->
+<section class="slide" data-title="Expansão">
+  <h2>Plano de expansão.</h2>
+  <p class="lead">Curitiba primeiro. Próximas praças só depois de unit economics validados.</p>
+
+  <h3>Roadmap geográfico</h3>
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Fase</th>
+        <th>Praça</th>
+        <th>Critério de salto</th>
+        <th>Janela</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">1</td>
+        <td>Curitiba MVP (Tier 1: Batel, Água Verde, Bigorrilho)</td>
+        <td>500 usuários · primeira transação real · CAC medido</td>
+        <td>M1–M3</td>
+      </tr>
+      <tr>
+        <td class="strong">2</td>
+        <td>Curitiba escala (Tier 1+2+3 + RMC)</td>
+        <td>10 vagas/dia sustentadas · LTV/CAC > 3 · churn < 8%</td>
+        <td>M4–M9</td>
+      </tr>
+      <tr>
+        <td class="strong">3</td>
+        <td>2ª praça: <strong>Florianópolis</strong> ou <strong>Porto Alegre</strong> <em style="color:var(--laranja)">[PREENCHER: decisão final baseada em food service per capita + custo Meta Ads B2B]</em></td>
+        <td>30 vagas/dia em CWB · MRR R$ 50K · 2ª contratação fechada</td>
+        <td>M10–M15</td>
+      </tr>
+      <tr>
+        <td class="strong">4</td>
+        <td>Joinville · Belo Horizonte · Rio</td>
+        <td>2ª praça com tração no mês 6 da abertura</td>
+        <td>M16–M24</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Por que Florianópolis ou Porto Alegre como 2ª praça</h3>
+  <ul>
+    <li><strong>Floripa:</strong> turismo gastronômico forte · alta sazonalidade (picos previsíveis = uso massivo de autônomo) · escala comprovada de bares premium</li>
+    <li><strong>POA:</strong> mercado food service maduro · mais conservador (gera ticket médio maior) · proximidade logística com Curitiba</li>
+    <li><strong>Critério final:</strong> CPL B2B mais baixo no Meta + mais escolas de gastronomia ativas</li>
+  </ul>
+
+  <div class="source">Fonte: <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §9</code> · validação de custo CPL pendente</div>
+</section>
+
+<!-- 12. PRÓXIMOS 90 DIAS -->
+<section class="slide" data-title="Próximos 90 dias">
+  <h2>Próximos 90 dias.</h2>
+  <p class="lead">Tarefa · Responsável · Dependência · ETA. Ordenado por bloqueio.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Tarefa</th>
+        <th>Responsável</th>
+        <th>Dependência</th>
+        <th class="center">ETA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">Validar CNPJ + abrir conta PJ</td>
+        <td>Leandro</td>
+        <td>Contadora</td>
+        <td class="center"><strong style="color:var(--amarelo)">14 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Decidir gateway PIX (Asaas/Pagar.me/Stripe)</td>
+        <td>Leandro</td>
+        <td>CNPJ</td>
+        <td class="center"><strong style="color:var(--amarelo)">21 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Aprovação Meta WhatsApp Cloud API</td>
+        <td>Leandro</td>
+        <td>Meta For Business · CNPJ</td>
+        <td class="center"><strong>30 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">20 entrevistas de validação (10 rest + 10 aut)</td>
+        <td>Leandro</td>
+        <td>—</td>
+        <td class="center"><strong style="color:var(--amarelo)">14 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Cutover BotConversa → Cloud API</td>
+        <td>Leandro</td>
+        <td>Meta API aprovada</td>
+        <td class="center"><strong>45 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Primeiros R$ 1.000 em ads (sandbox)</td>
+        <td>Leandro</td>
+        <td>CNPJ + pixel instalado</td>
+        <td class="center"><strong>30 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Primeiro restaurante pagante</td>
+        <td>Leandro</td>
+        <td>Gateway PIX + ads rodando</td>
+        <td class="center"><strong style="color:var(--vermelho)">45 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Sistema de avaliação 1-5 (UI no admin)</td>
+        <td>Leandro</td>
+        <td>—</td>
+        <td class="center"><strong>30 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">Aplicação edital Centelha-PR</td>
+        <td>Leandro</td>
+        <td>CNPJ + plano de negócio assinado</td>
+        <td class="center"><strong>60 dias</strong></td>
+      </tr>
+      <tr>
+        <td class="strong">500 usuários (410 aut + 90 rest)</td>
+        <td>Leandro</td>
+        <td>Ads rodando full</td>
+        <td class="center"><strong style="color:var(--verde)">90 dias</strong></td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Itens [PREENCHER] consolidados</h3>
+  <ul>
+    <li><strong>CNPJ status atual</strong> — confirmar com a contadora qual é o passo travado</li>
+    <li><strong>Conta PIX intermediação</strong> — escolher entre Asaas / Pagar.me / Stripe BR</li>
+    <li><strong>Gasto em ads até hoje</strong> — bater com Meta Business + Google Ads</li>
+    <li><strong>CTR / CPL / CPA atuais</strong> — só depois da primeira campanha rodar 7 dias</li>
+    <li><strong>Decisão final 2ª praça</strong> — Floripa ou POA, depende de teste de CPL B2B</li>
+    <li><strong>ETA exato Meta API</strong> — depende da resposta da revisão de negócio</li>
+  </ul>
+
+  <div class="source">Fonte: agregado de <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §9</code> + <code>SECURITY.md</code> + auditoria interna</div>
+</section>
+
+<!-- 13. RISCOS -->
+<section class="slide" data-title="Riscos">
+  <h2>Top 5 riscos.</h2>
+  <p class="lead">Cada risco com probabilidade · impacto · mitigação ativa.</p>
+
+  <div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th>Risco</th>
+        <th class="center">Prob.</th>
+        <th class="center">Impacto</th>
+        <th>Mitigação ativa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="strong">Meta não aprova WABA oficial</td>
+        <td class="center" style="color:var(--laranja)">Média</td>
+        <td class="center" style="color:var(--vermelho)">Alto</td>
+        <td>Bridge via Evolution API + BotConversa cobre fluxo simples · diversificação Telegram + web app no roadmap</td>
+      </tr>
+      <tr>
+        <td class="strong">Concorrência: GetNinjas, Yalo, iFood Trabalha entram no nicho</td>
+        <td class="center" style="color:var(--laranja)">Média</td>
+        <td class="center" style="color:var(--vermelho)">Alto</td>
+        <td>Velocidade de iteração · vertical food service profundo · contratos exclusivos com Tier 1 Curitiba antes do salto</td>
+      </tr>
+      <tr>
+        <td class="strong">Reclassificação trabalhista (TST decide vínculo CLT)</td>
+        <td class="center" style="color:var(--laranja)">Média</td>
+        <td class="center" style="color:var(--vermelho)">Crítico</td>
+        <td>Termos de uso de plataforma robustos · jurisprudência similar Uber/iFood · jurídico especializado · seguro de acidentes incluso no Selo</td>
+      </tr>
+      <tr>
+        <td class="strong">Fraude no PIX (autônomo cobra e não aparece, restaurante recebe trabalho mas não paga)</td>
+        <td class="center" style="color:var(--vermelho)">Alta</td>
+        <td class="center" style="color:var(--laranja)">Médio</td>
+        <td>PIX intermediado obrigatório · escrow até confirmação dos dois lados · sistema de avaliação · banimento após 2 ocorrências</td>
+      </tr>
+      <tr>
+        <td class="strong">Churn alto de autônomos (consegue 1 trabalho, some)</td>
+        <td class="center" style="color:var(--laranja)">Média</td>
+        <td class="center" style="color:var(--laranja)">Médio</td>
+        <td>Selo Facilite reativa engajamento · ranking público meritocrático · seguro acidentes · histórico de ganhos visível</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Riscos secundários monitorados</h3>
+  <ul>
+    <li><strong>Custo Meta Ads sobe e quebra CAC</strong> · mitigação: forte aposta em orgânico (sócios cobrem) + indicação CAC zero</li>
+    <li><strong>Vazamento LGPD de CPF/CNPJ/PIX</strong> · mitigação: AES-256-GCM at-rest · RLS deny-all · DPO designado pós-CNPJ</li>
+    <li><strong>Bot quebra em horário de pico</strong> · mitigação: 59 testes Vitest · rate-limit KV · idempotência via <code>messages.message_id</code></li>
+  </ul>
+
+  <div class="source">Fonte: <code>SECURITY.md</code> · <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §12</code></div>
+</section>
+
+<!-- 14. ASK -->
+<section class="slide" data-title="Ask">
+  <h2>Ask aos sócios.</h2>
+  <p class="lead">Decisão pedida em uma frase. Recursos pra destravar 12 semanas.</p>
+
+  <div class="grid-2" style="margin-top:32px">
+    <div class="card accent">
+      <h4 style="color:var(--amarelo)">Necessidade financeira</h4>
+      <div class="num" style="font-size:clamp(40px,7vw,64px);margin-top:8px">R$ 28.587</div>
+      <div class="label">Caixa requerido · 90 dias</div>
+      <p style="font-size:14px;margin-top:14px;color:#bbb"><strong>Sendo R$ 24.000 (84%) em ads pagos</strong> — Meta + Google + TikTok + LinkedIn. Resto: infraestrutura + jurídico + buffer.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--text)">Necessidade de tempo</h4>
+      <div class="num text" style="font-size:clamp(40px,7vw,64px);margin-top:8px">12 sem</div>
+      <div class="label">Janela de execução</div>
+      <p style="font-size:14px;margin-top:14px;color:#bbb">Bootstrap dos sócios cobre o caixa · operação rodando full-time · zero retirada de pró-labore neste período.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">Meta clara em 12 semanas</h3>
+  <ul>
+    <li class="green"><strong>10 vagas/dia recorrentes</strong> em Curitiba (300/mês)</li>
+    <li class="green"><strong>500 usuários cadastrados</strong> (410 autônomos + 90 restaurantes)</li>
+    <li class="green"><strong>Primeira transação real ponta a ponta</strong> com PIX intermediado</li>
+    <li class="green"><strong>R$ 8K/mês de receita</strong> (run-rate no fim do mês 3 com take rate ligado)</li>
+    <li class="green"><strong>Pixel da Meta calibrado</strong> com CPL real medido</li>
+  </ul>
+
+  <div class="callout ok">
+    <p><strong>Decisão pedida:</strong> aprovar o aporte de <strong style="color:var(--amarelo)">R$ 28.587 nas próximas 12 semanas</strong> destinado integralmente à validação operacional + tráfego pago, com sócios cobrindo equipe e operação sem pró-labore, para destravar 10 vagas/dia recorrentes em Curitiba.</p>
+  </div>
+
+  <div class="source">Fonte: <code>docs/PLANO_DE_NEGOCIO_FACILITE.md §8</code> + decisão de sócios em commit "foco 100% em anúncios pagos"</div>
+</section>
+
+<!-- 15. APÊNDICE -->
+<section class="slide" data-title="Apêndice">
+  <h2>Apêndice.</h2>
+  <p class="lead">Onde encontrar tudo.</p>
+
+  <div class="grid-2" style="margin-top:24px">
+    <div>
+      <h3>Repositórios</h3>
+      <ul>
+        <li><strong>Mono-repo principal</strong> · <code>github.com/Facilite-ai/facilite-ai</code></li>
+        <li><strong>Apresentação web</strong> · <code>github.com/LeandroLdesign/business-plan-made-easy</code></li>
+        <li><strong>Site live</strong> · <code>facilite.ai</code></li>
+        <li><strong>Dashboard</strong> · <code>dashboard.facilite.ai</code></li>
+        <li><strong>Bot</strong> · <code>bot.facilite.ai</code></li>
+      </ul>
+
+      <h3 style="margin-top:24px">Docs core</h3>
+      <ul>
+        <li><code>docs/PLANO_DE_NEGOCIO_FACILITE.md</code></li>
+        <li><code>docs/financeiro/MODELO_FINANCEIRO.csv</code> · 36 meses</li>
+        <li><code>docs/financeiro/DASHBOARD_FINANCEIRO.html</code></li>
+        <li><code>docs/marketing/PESQUISA_VALIDACAO.md</code> · roteiro 20 entrevistas</li>
+        <li><code>docs/fluxo-atendimento/fluxo.html</code> · canvas state-machine</li>
+        <li><code>SECURITY.md</code> · postura OWASP + LGPD</li>
+        <li><code>docs/_ENTREGA_DRIVE/</code> · pacote PDF organizado por área</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Apresentações</h3>
+      <ul>
+        <li><strong>Status interno (este doc)</strong> · <code>docs/apresentacao/STATUS_FACILITE_MAIO_2026.html</code></li>
+        <li><strong>Plano de Negócio público</strong> · <code>docs/apresentacao/PLANO_NEGOCIO_FACILITE.html</code></li>
+        <li><strong>Pitch deck investidor</strong> · <code>docs/marketing/PITCH_DECK.html</code></li>
+        <li><strong>One-pager</strong> · <code>docs/marketing/ONE_PAGER.html</code></li>
+        <li><strong>PDFs no Drive</strong> · <code>docs/_ENTREGA_DRIVE/06_Apresentacoes_PDF/</code></li>
+      </ul>
+
+      <h3 style="margin-top:24px">Equipe Claude (subagentes)</h3>
+      <ul>
+        <li>arquiteto-whatsapp · Meta Cloud API</li>
+        <li>dev-cloudflare-workers · Hono + bindings</li>
+        <li>dev-supabase · schema + RLS + Edge Functions</li>
+        <li>devops-cicd · GitHub Actions + Wrangler</li>
+        <li>engenheiro-fluxo · state-machine</li>
+        <li>especialista-openai · Responses API</li>
+        <li>qa-testador · Vitest</li>
+        <li>documentador · sync docs ↔ código</li>
+      </ul>
+
+      <h3 style="margin-top:24px">Contatos sócios</h3>
+      <ul>
+        <li><strong>Leandro Lima</strong> · fundador · <code>claudeiahrc@gmail.com</code> · WhatsApp <code>[PREENCHER]</code></li>
+        <li><strong>Pablo</strong> · Admin GitHub Org Facilite-ai · contato <code>[PREENCHER]</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ok" style="margin-top:32px">
+    <p><strong>Próximo update deste documento:</strong> ao fim do mês 1 (28 dias) com CNPJ resolvido, gateway PIX escolhido e primeira semana de ads rodando. Aí substituímos os <em>[PREENCHER]</em> pelos números reais.</p>
+  </div>
+
+  <div class="source">Compilado por Leandro Lima + Claude · 08 de maio de 2026 · Curitiba/PR</div>
+</section>
+
+</div>
+
+<div class="nav-help">
+  <kbd>←</kbd> <kbd>→</kbd> ou <kbd>Espaço</kbd> navegar · <kbd>F</kbd> fullscreen · <kbd>P</kbd> imprimir
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const crumb = document.getElementById('crumb');
+  let cur = 0;
+  function go(i){
+    cur = Math.max(0, Math.min(slides.length-1, i));
+    slides[cur].scrollIntoView({behavior:'smooth', block:'start'});
+    counter.textContent = (cur+1)+' / '+slides.length;
+    crumb.textContent = slides[cur].dataset.title || '';
+  }
+  function next(){ go(cur+1); }
+  function prev(){ go(cur-1); }
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); next(); }
+    if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); prev(); }
+    if(e.key==='Home'){ e.preventDefault(); go(0); }
+    if(e.key==='End'){ e.preventDefault(); go(slides.length-1); }
+    if(e.key==='f' || e.key==='F'){ e.preventDefault(); document.documentElement.requestFullscreen?.(); }
+    if(e.key==='p' || e.key==='P'){ e.preventDefault(); window.print(); }
+  });
+  // Atualiza counter conforme rola (touch / scroll mobile)
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = Array.from(slides).indexOf(e.target);
+        if(idx>=0){
+          cur = idx;
+          counter.textContent = (idx+1)+' / '+slides.length;
+          crumb.textContent = e.target.dataset.title || '';
+        }
+      }
+    });
+  }, {threshold:0.5});
+  slides.forEach(s=>obs.observe(s));
+</script>
+
+</body>
+</html>
