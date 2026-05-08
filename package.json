@@ -4,7 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "mkdir -p dist && cp index.html dist/index.html",
-    "dev": "node serve.mjs"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
   }
 }
